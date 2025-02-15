@@ -1,4 +1,6 @@
+using Core.AuthoreService;
 using DatAccess.Data;
+using DatAccess.Repositories.AuthorRepo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -8,10 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
+
 builder.Services.AddDbContext<BookDbContext>(Options =>
     Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<AuthoreService>();
 
 var app = builder.Build();
 

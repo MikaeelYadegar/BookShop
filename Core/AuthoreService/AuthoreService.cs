@@ -14,8 +14,22 @@ public class AuthoreService
     {
         return await _authorRepository.GetAll();
     }
+public async Task<Authore>GetAllAuthoresByID(int id)
+    {
+        return await _authorRepository.GetById(id);
+    }
+
+
     public async Task CreateAuthore(Authore authore)
     {
         await _authorRepository.Add(authore);
+    }
+    public async Task UpdateAuthore(Authore authore)
+    {
+        await _authorRepository.Update(authore);
+    }
+    public async Task DeleteAuthore(Authore authore)
+    {
+        await _authorRepository.Delete(authore);
     }
 }

@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DatAccess.Data;
 using DatAccess.Models;
+using Core.AuthoreService;
 
 namespace AdminBookShop.Controllers
 {
     public class AuthoresController : Controller
     {
-        private readonly BookDbContext _context;
+        private readonly AuthoreService _authoreService;
 
-        public AuthoresController(BookDbContext context)
+        public AuthoresController(AuthoreService authoreService)
         {
-            _context = context;
+            _authoreService = authoreService;
         }
 
         // GET: Authores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Authores.ToListAsync());
+            return View(await _authoreService.GetAllAuthores());
         }
 
         // GET: Authores/Details/5
@@ -33,8 +34,8 @@ namespace AdminBookShop.Controllers
                 return NotFound();
             }
 
-            var authore = await _context.Authores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var authore = await _authoreService.GetAllAuthoresByID(id.Value);
+              
             if (authore == null)
             {
                 return NotFound();
@@ -58,8 +59,8 @@ namespace AdminBookShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(authore);
-                await _context.SaveChangesAsync();
+            await  _authoreService.CreateAuthore(authore);
+              
                 return RedirectToAction(nameof(Index));
             }
             return View(authore);
@@ -73,7 +74,7 @@ namespace AdminBookShop.Controllers
                 return NotFound();
             }
 
-            var authore = await _context.Authores.FindAsync(id);
+            var authore = await _authoreService.GetAllAuthoresByID(id.Value);
             if (authore == null)
             {
                 return NotFound();
@@ -97,19 +98,12 @@ namespace AdminBookShop.Controllers
             {
                 try
                 {
-                    _context.Update(authore);
-                    await _context.SaveChangesAsync();
+                   await _authoreService.UpdateAuthore(authore);
+                 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AuthoreExists(authore.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+     
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -124,8 +118,8 @@ namespace AdminBookShop.Controllers
                 return NotFound();
             }
 
-            var authore = await _context.Authores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var authore = await _authoreService.GetAllAuthoresByID(id.Value);
+                
             if (authore == null)
             {
                 return NotFound();
@@ -139,19 +133,12 @@ namespace AdminBookShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var authore = await _context.Authores.FindAsync(id);
-            if (authore != null)
-            {
-                _context.Authores.Remove(authore);
-            }
 
-            await _context.SaveChangesAsync();
+            var authore = await _authoreService.GetAllAuthoresByID(id);
+         await   _authoreService.DeleteAuthore(authore);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AuthoreExists(int id)
-        {
-            return _context.Authores.Any(e => e.Id == id);
-        }
+
     }
 }
