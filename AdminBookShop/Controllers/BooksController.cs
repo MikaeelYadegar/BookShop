@@ -9,6 +9,7 @@ using DatAccess.Data;
 using DatAccess.Models;
 using Core.BookService;
 using Core.AuthoreService;
+using DatAccess.Models;
 
 namespace AdminBookShop.Controllers
 {
@@ -60,7 +61,7 @@ namespace AdminBookShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Price,Img,AuthoreId")] Book book)
+        public async Task<IActionResult> Create (BookDto book)
         {
             if (ModelState.IsValid)
             {
