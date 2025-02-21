@@ -4,46 +4,67 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BookShop</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BookShop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BookShop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <div dir="rtl" style="font-family: Bykan;">
+
+        <!-- nav bar     -->
+        <nav class="nav">
+
+
+            <div class="mobileNav hidden">
+                <i id="myNavBtn" class="fa fa-bars"></i>
+                <a> LOGO </a>
+
+            </div>
+
+            <div id="desktopNav" class="navbar">
+                <a asp-controller="Home" asp-action="Index" class="atext">خانه</a>
+                <a class="atext" href="bookList.html"> محصولات </a>
+                <a asp-controller="Home" asp-action="aboutUs"class="atext">درباره ما</a>
+                <a class="atext" href="Register.html"> ورود</a>
+
+                <a> LOGO </a>
+            </div>
+
+
+
+        </nav>
+        @RenderBody()
+
+        <!-- footer -->
+        <footer>
+            <div class="about-us">
+                <h3>درباره ما</h3>
+                <p>ما یک شرکت متعهد به ارائه خدمات با کیفیت بالا به مشتریان خود هستیم.</p>
+            </div>
+            <div class="important-links">
+                <h3>لینک‌های مهم</h3>
+                <ul>
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">محصولات</a></li>
+                    <li><a href="#">خدمات</a></li>
+                    <li><a href="#">تماس</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <h3>ما را دنبال کنید</h3>
+                <div class="icons">
+                    <a href="#"><img src="~/asstes/img/8726504_telegram_icon.svg" alt="telegram"></a>
+                    <a href="#"><img src="~/asstes/img/1298747_instagram_brand_logo_social media_icon.svg" alt="Twitter"></a>
+                    <a href="#"><img src="~/asstes/img/294709_circle_twitter_icon.svg " alt="Instagram"></a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </footer>
+     ~/asstes
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - BookShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

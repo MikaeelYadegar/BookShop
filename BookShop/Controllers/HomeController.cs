@@ -17,8 +17,8 @@ namespace BookShop.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+         
+        public IActionResult aboutUs()
         {
             return View();
         }
