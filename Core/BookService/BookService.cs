@@ -7,7 +7,8 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
-using System.Threading.Tasks; 
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 namespace Core.BookService
 {
     public class BookService
@@ -38,7 +39,11 @@ namespace Core.BookService
             book.Price= bookDto.Price;
             book.Description= bookDto.Description;
             book.AuthoreId= bookDto.AuthoreId;
-            if(bookDto.Img!=null)
+            book.IsAvail= bookDto.IsAvail;
+            book.ShowHomePage= bookDto.ShowHomePage;
+            book.Created = DateTime.Now;
+            
+            if (bookDto.Img!=null)
             {
                 book.Img = await _fileUploadService.UploadFileAsync(bookDto.Img);
             }
@@ -56,6 +61,9 @@ namespace Core.BookService
             Price=bookdto.Price,
             Description=bookdto.Description,
             Title=bookdto.Title,
+            IsAvail=bookdto.IsAvail,
+            ShowHomePage=bookdto.ShowHomePage,
+            Created=DateTime.Now,
             };
             book.Img = await _fileUploadService.UploadFileAsync(bookdto.Img);
 
@@ -72,7 +80,9 @@ namespace Core.BookService
                 Price=book.Price,
                 Description = book.Description,
                 AuthoreId = book.AuthoreId,
-                ImgName = book.Img
+                ImgName = book.Img,
+                IsAvail = book.IsAvail,
+                ShowHomePage=book.ShowHomePage,
             };
             return bookDto;
         }

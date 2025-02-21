@@ -12,6 +12,8 @@ namespace Core.BookService
         public string Description { get; set; }
         public int Price { get; set; }
         public IFormFile? Img { get; set; }
+        public bool IsAvail { get; set; }
+        public bool ShowHomePage { get; set; }
         public string?ImgName { get; set; }
 
         public int AuthoreId { get; set; }

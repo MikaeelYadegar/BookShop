@@ -37,6 +37,15 @@
                 <select asp-for="AuthoreId" class ="form-control" asp-items="ViewBag.AuthoreId"></select>
             </div>
             <div class="form-group">
+                <label class=control-label>IsAvail</label>
+                <input asp-for="IsAvail"class="form-check-control" />
+            </div>
+            <div class="form-group">
+                <label class=control-label>ShowHomePage</label>
+                <input asp-for="ShowHomePage" class="form-check-control" />
+            </div>
+     
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
