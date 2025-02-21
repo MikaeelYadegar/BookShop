@@ -80,7 +80,7 @@ namespace AdminBookShop.Controllers
                 return NotFound();
             }
 
-            var book = await _bookService.GetBooksById(id.Value);
+            var book = await _bookService.GetBookDtoById(id.Value);
             if (book == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace AdminBookShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Price,Img,AuthoreId")] Book book)
+        public async Task<IActionResult> Edit(int id,BookDto book)
         {
             if (id != book.Id)
             {

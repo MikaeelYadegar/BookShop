@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-               <img src="~/uploads/@item.Img" width="20px" />
+               <img src="api/File/GetFile?filename=@item.Img" width="30px" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Authore.Name)

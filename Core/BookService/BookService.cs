@@ -31,8 +31,17 @@ namespace Core.BookService
         {
             return await _bookRepository.GetByID(id);
         }   
-        public async Task Update(Book book) 
+        public async Task Update(BookDto bookDto)
         {
+            var book = await GetBooksById(bookDto.Id);
+            book.Title= bookDto.Title;
+            book.Price= bookDto.Price;
+            book.Description= bookDto.Description;
+            book.AuthoreId= bookDto.AuthoreId;
+            if(bookDto.Img!=null)
+            {
+                book.Img = await _fileUploadService.UploadFileAsync(bookDto.Img);
+            }
             await _bookRepository.Update(book);
         }
         public async Task Delete(Book book)
@@ -51,6 +60,21 @@ namespace Core.BookService
             book.Img = await _fileUploadService.UploadFileAsync(bookdto.Img);
 
             await _bookRepository.Add(book);
+        }
+
+        public async Task<BookDto>GetBookDtoById(int id)
+        {
+            var book=await _bookRepository.GetByID(id);
+            var bookDto = new BookDto()
+            {
+                Id = id,
+                Title=book.Title,
+                Price=book.Price,
+                Description = book.Description,
+                AuthoreId = book.AuthoreId,
+                ImgName = book.Img
+            };
+            return bookDto;
         }
     }
 }
