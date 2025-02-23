@@ -1,5 +1,4 @@
-﻿@using DatAccess.Models
-@model List<Book>
+﻿
 
 @{
     ViewData["Title"] = "Home Page";
@@ -19,30 +18,11 @@
         <img class="headImg" src="~/asstes/img/_8e1959ca-6500-4974-b71c-e2405e9198c0.jpg" width="500px" height="450px" alt="diaycode header">
     </div>
 </header>
-         <div class="BooksContainer">
-        @foreach(var item in Model)
-        {
-
-        
-             <div class="bookItem">
-              <div class="bookDetails">
-                <img src="asstes/img/9780063317475.webp" class="imgBook">
-                <div>
-                 <h3>
-                  @item.Title
-                 </h3>
-                 <p>
-                  @item.Authore.Name
-                 </p>
-                 <p> @item.Price تومان </p>
  
-                </div>
-              </div>
+            @await Component.InvokeAsync("HomeBook",new {ShowHome=true ,IsNew=false}); 
 
-               <a href="book.html" style="text-decoration : none" class="cartBtn">
-                مشاهده
-              </a>
-             </div>
+            <h2 style="text-align :center">
+                کتاب های جدید
+            </h2>
 
-             }
-         </div>
+@await Component.InvokeAsync("HomeBook", new { ShowHome = true, IsNew = true }); 

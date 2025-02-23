@@ -1,0 +1,30 @@
+﻿@using DatAccess.Models
+@model List<Book>
+
+<div class="BooksContainer">
+    @foreach (var item in Model)
+    {
+
+
+        <div class="bookItem">
+            <div class="bookDetails">
+                <img src="api/File/GetFile?filename=@item.Img" width="200px" class="imgBook">
+                <div>
+                    <h3>
+                        @item.Title
+                    </h3>
+                    <p>
+                        @item.Authore.Name
+                    </p>
+                    <p> @item.Price تومان </p>
+
+                </div>
+            </div>
+
+            <a href="book.html" style="text-decoration : none" class="cartBtn">
+                مشاهده
+            </a>
+        </div>
+
+    }
+</div>

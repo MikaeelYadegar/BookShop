@@ -18,8 +18,8 @@ namespace BookShop.Controllers
 
         public async Task <IActionResult> Index( )
         {
-            var data = await _bookService.GetBooksWithAuthore();
-            return View(data);
+           
+            return View();
         }
          
         public IActionResult aboutUs()
