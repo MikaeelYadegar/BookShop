@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using BookShop.Models;
+using Core.BookService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShop.Controllers
@@ -7,15 +8,18 @@ namespace BookShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BookService _bookService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,BookService bookService)
         {
             _logger = logger;
+            _bookService = bookService;
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index( )
         {
-            return View();
+            var data = await _bookService.GetBooksWithAuthore();
+            return View(data);
         }
          
         public IActionResult aboutUs()
