@@ -86,5 +86,37 @@ namespace Core.BookService
             };
             return bookDto;
         }
+
+
+        public async Task<PageBookDto> GetBookPageInation(int page,int pagesize,string search)
+        {
+            var books= _bookRepository.GetAll();
+            if(!string.IsNullOrEmpty(search))
+            {
+                books=books.Where( a=>a.Title.Contains(search)||a.Description.Contains(search)||a.Authore.Name.Contains(search));
+            }
+            int totalcount=books.Count();
+            int totalpage=(int)Math.Ceiling((double)totalcount/pagesize);
+
+            books=books.Skip((page-1)* pagesize).Take(pagesize);
+            books = books.Include(a => a.Authore);
+            var bookDtos = await books.Select(s => new BookDto()
+            {
+                Id = s.Id,
+                ImgName = s.Img,
+                Price = s.Price,
+                Title = s.Title,
+                Description = s.Description,
+                AuthoreName=s.Authore.Name,
+                AuthoreId = s.AuthoreId,
+            }).ToListAsync();
+            var result = new PageBookDto()
+            {
+                Items = bookDtos,
+                Page=page,
+                TotalPage=totalpage,
+            };
+            return result;
+        }
     }
 }
