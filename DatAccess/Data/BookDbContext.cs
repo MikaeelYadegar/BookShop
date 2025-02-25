@@ -1,10 +1,11 @@
 ﻿using DatAccess.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace DatAccess.Data;
 
-public class BookDbContext : DbContext
+public class BookDbContext : IdentityDbContext<User,Role,int>
 {
     public BookDbContext(DbContextOptions<BookDbContext> options) : base(options)
     {

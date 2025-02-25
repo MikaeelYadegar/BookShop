@@ -17,6 +17,6 @@ namespace Core.BookService
         public string?ImgName { get; set; }
 
         public int AuthoreId { get; set; }
-        public string AuthoreName { get; set; } 
+        public string? AuthoreName { get; set; } 
     }
 }
