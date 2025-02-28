@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using BookShop.Models;
 using Core.BookService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShop.Controllers
@@ -21,7 +22,8 @@ namespace BookShop.Controllers
            
             return View();
         }
-         
+
+        [Authorize]
         public IActionResult aboutUs()
         {
             return View();
