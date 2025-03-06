@@ -25,7 +25,7 @@ namespace BookShop.Controllers
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.Email, Email = model.Email };
-                var res = await _userManager.CreateAsync(user);
+                var res = await _userManager.CreateAsync(user,model.Password);
                 if (res.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -34,5 +34,28 @@ namespace BookShop.Controllers
             }
             return View(model);
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (res.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(model);
+        }
+        public async Task<IActionResult>LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
+
 }

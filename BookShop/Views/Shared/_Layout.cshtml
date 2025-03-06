@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using DatAccess.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> _signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,7 +30,16 @@
                 <a asp-controller="Home" asp-action="Index" class="atext">خانه</a>
                 <a class="atext" asp-controller="Book" asp-action="BookList"> محصولات </a>
                 <a asp-controller="Home" asp-action="aboutUs"class="atext">درباره ما</a>
-                <a class="atext" href="Register.html"> ورود</a>
+                @if(_signInManager.IsSignedIn(User))
+                {
+                    <a class="atext" asp-controller="Profile" asp-action="Index"> پروفایل</a>
+                    <a class="atext" asp-controller="Account" asp-action="LogOut"> خروج</a>
+                }
+                else
+                {
+                    <a class="atext" asp-controller="Account" asp-action="Login"> ثبت نام /ورود</a>
+                }
+             
 
                 <a> LOGO </a>
             </div>

@@ -16,3 +16,4 @@ namespace BookShop.Models
         public string ConfirmPassword { get; set; }
     }
 }
+  

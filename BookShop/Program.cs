@@ -40,7 +40,14 @@ builder.Services.AddIdentity<User, Role>(Options =>
    .AddEntityFrameworkStores<BookDbContext>()
    .AddSignInManager<SignInManager<User>>()
    .AddDefaultTokenProviders();
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 

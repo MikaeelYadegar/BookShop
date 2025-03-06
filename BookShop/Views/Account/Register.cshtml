@@ -19,7 +19,7 @@
             <input asp-for="ConfirmPassword" type="password" id="ConfirmPassword" name="ConfirmPassword" required>
         </div>
         <button type="submit" style="font-family: Bykan; font-size: 18px;">ثبت نام</button>
-        <p>آیا اکانت داری? <a href="login.html">ورود</a></p>
+        <p>آیا اکانت داری? <a asp-controller="Account" asp-action="Login">ورود</a></p>
     </form>
 </div>
 
