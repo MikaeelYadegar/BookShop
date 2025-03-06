@@ -24,6 +24,11 @@ namespace BookShop.Controllers
             return View(data);
         }
 
+        public async Task <IActionResult>GetBook(int id)
+        {
+            var book = await _bookService.GetBooksById(id);
+            return PartialView(book);
+        }
 
     }
 }

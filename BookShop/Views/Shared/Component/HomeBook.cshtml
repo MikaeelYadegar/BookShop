@@ -13,8 +13,15 @@
                     <h3>
                         @item.Title
                     </h3>
+                    <div style="display:flex ;justify-content:space-between;align-items:center">
+                        <p>
+                            @item.Authore.Name
+                        </p>
+                        <a style="cursor:pointer" onclick="OpenModal(@item.Id)" id="myBtn">  <i class="fa fa-search"></i> </a>
+
+                    </div>
                     <p>
-                        @item.Authore.Name
+                       
                     </p>
                     <p> @item.Price تومان </p>
 

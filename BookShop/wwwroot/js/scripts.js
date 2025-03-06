@@ -21,13 +21,16 @@ navBtn.addEventListener("click" , () => {
 
 
 let countInput = document.getElementById("countInput");
-countInput.addEventListener("change" , () => {
+if (countInput) {
+    countInput.addEventListener("change", () => {
 
-    let bookIntPrice = document.getElementById("bookIntPrice");
-    let bookShowPrice = document.getElementById("bookShowPrice");
-    let count = countInput.value;
-    let totalPrice = count * bookIntPrice.value;
-    bookShowPrice.innerHTML = `قیمت نهایی : ${totalPrice.toLocaleString()} تومان`;
+        let bookIntPrice = document.getElementById("bookIntPrice");
+        let bookShowPrice = document.getElementById("bookShowPrice");
+        let count = countInput.value;
+        let totalPrice = count * bookIntPrice.value;
+        bookShowPrice.innerHTML = `قیمت نهایی : ${totalPrice.toLocaleString()} تومان`;
 
-});
+    });
+}
+
 

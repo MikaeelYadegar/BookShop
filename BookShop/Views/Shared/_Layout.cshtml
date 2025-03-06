@@ -47,7 +47,27 @@
 
 
         </nav>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+               <div id="modal-body">
+
+               </div>
+            </div>
+
+        </div>
+
         @RenderBody()
+
+     
+
+        <!-- The Modal -->
+
+
+
+
 
         <!-- footer -->
         <footer>
@@ -80,5 +100,9 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/scripts.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        // Get the modal
+  
+    </script>
 </body>
 </html>
