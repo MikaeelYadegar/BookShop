@@ -12,6 +12,8 @@ public class BookDbContext : IdentityDbContext<User,Role,int>
     }
     public DbSet<Book> Books { get; set; }
     public DbSet<Authore> Authores { get; set; }
+    public DbSet<Basket> Baskets { get; set; }
+    public DbSet<BasketItems> BasketItems { get; set; }
 }
 public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<BookDbContext>
 {
