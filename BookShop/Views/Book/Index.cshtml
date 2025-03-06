@@ -9,7 +9,7 @@
         <img class="headImg" src="/api/File/GetFile?filename=@Model.Img" alt="@Model.Title">
     </div>
 
-
+    <input type="hidden" id="bookId" value="@Model.Id" />
     <div class="headerItems">
         <h1>
           @Model.Title
@@ -32,7 +32,7 @@
 
         @if(Model.IsAvail)
         {
-            <a href="checkout.html" class="cartBtn atext" style="margin-top: 15px;">
+            <a  onclick="AddToBasket()" class="cartBtn atext" style="margin-top: 15px;">
                 افزودن به سبد
             </a>
         }
@@ -51,3 +51,47 @@
 
 </div>
 
+@section Scripts
+{
+    <script>
+        function AddToBasket()
+        {
+            var bookId=document.getElementById("bookId").value;
+            var qty=document.getElementById("countInput").value;
+            var data={
+                bookId:bookId,
+                qty:qty
+            };
+            try{
+                 fetch('/Order/AddToBasket',
+                {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(data)
+                })
+                .then(responce=>responce.json())
+                .then(data=>{
+                    console.log('Success:',data);
+                    if(data.res==false)
+                    {
+                 Swal.fire({
+                      icon: "error",
+                      title: "ثبت نام",
+                      text: "ابتدا در سایت ورود کنید ",
+                     
+                      });
+                    }
+                })
+                .catch((error)=>{
+                    console.error('Error:',error);
+                });
+            }
+            catch
+            {
+
+            }
+        }
+    </script>
+}
