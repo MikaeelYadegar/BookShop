@@ -69,5 +69,17 @@ namespace Core.OrderService
             await _basketRepository.DeleteBasketItem(baskets);
             return true;
         }
+        public async Task<bool> Pay(string mobile,string address,int userId)
+        {
+            var basket=await _basketRepository.GetAll(a=>a.UserId == userId && a.Status==DatAccess.Enums.Status.Create).FirstOrDefaultAsync();
+            if (basket == null)
+                return false;
+            basket.Mobile=mobile;
+            basket.Address=address;
+            basket.Payed=DateTime.Now;
+            basket.Status = DatAccess.Enums.Status.Final;
+            await _basketRepository.Update(basket);
+            return true;
+        }
     }
 }
