@@ -81,5 +81,13 @@ namespace Core.OrderService
             await _basketRepository.Update(basket);
             return true;
         }
+        public async Task<List<Basket>> GetUserOrders(int userId)
+        {
+            var baskets = await _basketRepository.GetAll(a => a.UserId == userId&& a.Status !=DatAccess.Enums.Status.Create)
+    
+                .Include(a => a.BasketItems)
+                .ThenInclude(a => a.Book).AsNoTracking().ToListAsync();
+            return baskets;
+        }
     }
 }

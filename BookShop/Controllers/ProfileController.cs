@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.OrderService;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BookShop.Controllers
 {
     public class ProfileController : Controller
     {
-        public IActionResult Index()
+        private readonly OrderService _orderService;
+        public ProfileController(OrderService orderService)
         {
-            return View();
+            _orderService = orderService;
+        }
+        public async Task< IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var data = await _orderService.GetUserOrders(Convert.ToInt32(userId));
+            return View(data);
         }
     }
 }
