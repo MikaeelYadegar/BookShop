@@ -74,6 +74,8 @@
                 .then(responce=>responce.json())
                 .then(data=>{
                     console.log('Success:',data);
+
+
                     if(data.res==false)
                     {
                  Swal.fire({
@@ -83,6 +85,8 @@
                      
                       });
                     }
+
+                    
                 })
                 .catch((error)=>{
                     console.error('Error:',error);

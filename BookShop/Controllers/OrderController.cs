@@ -31,5 +31,18 @@ namespace BookShop.Controllers
             var result=await _orderService.AddToBasket(model.bookId,model.qty,Convert.ToInt32(userId));
             return Ok(new {res=true});
         }
+        [Authorize]
+        public async Task<IActionResult>Basket()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var data = await _orderService.GetUserBasket(Convert.ToInt32(userId));
+            return View(data);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveBasket([FromBody]RemoveBasketDto model)
+        {
+            var res = await _orderService.RemoveItemBasket(model.Id);
+            return Ok(new { res = true });
+        }
     }
 }
