@@ -1,0 +1,80 @@
+﻿@using Core.Extension
+@using Core.OrderService.Model
+@model List<AdminOrderDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              کاربر
+            </th>
+            <th>
+                موبایل
+            </th>
+            <th>
+              تاریخ ثبت
+            </th>
+            <th>
+            آدرس
+            </th>
+            <th>
+                محصولات
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Mobile
+                </td>
+                <td>
+                    @item.Payed.ToPersianDateString()
+                </td>
+                <td>
+  
+                  @item.Address
+                </td>
+                <td>
+                    @String.Join(",",@item.Items)
+                 
+                </td>
+                <td>
+                    @if (item.Status == DatAccess.Enums.Status.Accepted)
+                    {
+                        <span style="color:green" class="status">ارسال شده</span>
+                    }
+                    else if (item.Status == DatAccess.Enums.Status.Rejected)
+                    {
+                        <span style="color:red" class="status">لغو شده</span>
+                    }
+                    else if (item.Status == DatAccess.Enums.Status.Final)
+                    {
+                        <span style="color:orange" class="status">در انتظار تایید فروشنده</span>
+                    }   
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

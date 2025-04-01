@@ -1,4 +1,5 @@
-﻿using DatAccess.Models;
+﻿using Core.OrderService.Model;
+using DatAccess.Models;
 using DatAccess.Repositories.BasketRepo;
 using DatAccess.Repositories.BookRepo;
 using Microsoft.EntityFrameworkCore;
@@ -87,6 +88,26 @@ namespace Core.OrderService
     
                 .Include(a => a.BasketItems)
                 .ThenInclude(a => a.Book).AsNoTracking().ToListAsync();
+            return baskets;
+        }
+        public async Task<List<AdminOrderDto>> GetAllOrders()
+        {
+            var baskets = await _basketRepository.GetAll(a => a.Status != DatAccess.Enums.Status.Create)
+                .Include(a => a.User)
+                .Include(a => a.BasketItems)
+                .ThenInclude(a => a.Book)
+                .Select(s => new AdminOrderDto()
+                {
+                    Address = s.Address,
+                    Mobile = s.Mobile,
+                    Id = s.Id,
+                    Status = s.Status,
+                    Payed = s.Payed,
+                    UserId = s.UserId,
+                    UserName = s.User.UserName,
+                    Items = s.BasketItems.Select(c => c.Book.Title).ToList()
+                })
+                .AsNoTracking().ToListAsync();
             return baskets;
         }
     }
