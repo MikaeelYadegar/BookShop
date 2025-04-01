@@ -110,5 +110,41 @@ namespace Core.OrderService
                 .AsNoTracking().ToListAsync();
             return baskets;
         }
+        public async Task<AdminOrderDto> GetOrderWithId(int id)
+        {
+            var baskets = await _basketRepository.GetAll(a => a.Id==id)
+                .Include(a => a.User)
+                .Include(a => a.BasketItems)
+                .ThenInclude(a => a.Book)
+                .Select(s => new AdminOrderDto()
+                {
+                    Address = s.Address,
+                    Mobile = s.Mobile,
+                    Id = s.Id,
+                    Status = s.Status,
+                    Payed = s.Payed,
+                    UserId = s.UserId,
+                    UserName = s.User.UserName,
+                    Items = s.BasketItems.Select(c => c.Book.Title).ToList()
+                })
+                .AsNoTracking().FirstOrDefaultAsync();
+            return baskets;
+        }
+
+        public async Task<bool> SetStatus(int Id,bool State)
+        {
+            var basket = await _basketRepository.GetAll(a => a.Id == Id).FirstOrDefaultAsync();
+            if(State)
+            {
+                basket.Status=DatAccess.Enums.Status.Accepted;
+            }
+            else
+            {
+                basket.Status = DatAccess.Enums.Status.Rejected;
+            }
+            await _basketRepository.Update(basket);
+            return true;
+        }
+
     }
 }
