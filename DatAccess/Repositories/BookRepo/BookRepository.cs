@@ -1,6 +1,7 @@
 ﻿using DatAccess.Data;
 using DatAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace DatAccess.Repositories.BookRepo;
@@ -18,6 +19,17 @@ public class BookRepository : IBookRepository
         await _context.SaveChangesAsync();  
     }
 
+    public async Task AddComment(Comment comment)
+    {
+        Debug.WriteLine($"ProductIdهنگام ذخیره در دیتابیس فرم :{comment.ProductId}");
+        if (comment.ProductId == 0)
+        
+            throw new Exception("productid مقدار ندارد");
+        
+       await _context.Comments.AddAsync(comment);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task Delete(Book book)
     {
       _context.Books.Remove(book);
@@ -29,6 +41,16 @@ public class BookRepository : IBookRepository
        var book= await GetByID(id);
         _context.Books.Remove(book);
         await _context.SaveChangesAsync();  
+    }
+
+    public async Task DeleteComment(int commentId)
+    {
+       var comment=await _context.Comments.FindAsync(commentId);
+        if(comment!=null)
+        {
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public IQueryable<Book> GetAll(Expression<Func<Book, bool>> where = null)
@@ -46,9 +68,21 @@ public class BookRepository : IBookRepository
         return await _context.Books.Include(a=>a.Authore).FirstOrDefaultAsync(x => x.Id == id);    
     }
 
+    public async Task<List<Comment>> GetCommentByID(int productId)
+    {
+        return await _context.Comments.Where(c => c.ProductId== productId)
+                                        .OrderByDescending(c=>c.CreatedAt)
+                                        .ToListAsync();
+                        
+            
+    }
+
     public async Task Update(Book book)
     {
        _context.Books.Update(book);
         await _context.SaveChangesAsync(); 
     }
+
+ 
+
 }

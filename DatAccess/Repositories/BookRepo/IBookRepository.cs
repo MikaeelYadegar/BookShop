@@ -13,4 +13,7 @@ public interface IBookRepository
     Task Update(Book book);
     Task Delete(Book book);
     Task Delete(int id);    
+   Task< List <Comment>> GetCommentByID(int productId);
+    Task AddComment(Comment comment);
+    Task DeleteComment(int commentId);
 }

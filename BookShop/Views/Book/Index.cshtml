@@ -1,36 +1,36 @@
 ﻿@using DatAccess.Models
-@model Book
+@model BookShop.Models.BookDetailsViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="myHeader">
     <div class="headerItems">
-        <img class="headImg" src="/api/File/GetFile?filename=@Model.Img" alt="@Model.Title">
+        <img class="headImg" src="/api/File/GetFile?filename=@Model.Book.Img" alt="@Model.Book.Title">
     </div>
 
-    <input type="hidden" id="bookId" value="@Model.Id" />
+    <input type="hidden" id="bookId" value="@Model.Book.Id" />
     <div class="headerItems">
         <h1>
-          @Model.Title
+          @Model.Book.Title
         </h1>
         <p>
-           @Model.Description
+           @Model.Book.Description
         </p>
         <p>
-           @Model.Authore.Name
+             @Model.Book.Authore.Name
         </p>
 
         <div class="bookPrice">
             <input id="bookIntPrice" type="hidden" value="15000">
-            <strong id="bookShowPrice"> @Model.Price تومان </strong>
+            <strong id="bookShowPrice"> @Model.Book.Price تومان </strong>
             <div>
                 تعداد :  <input id="countInput" type="number" min="1" value="1">
 
             </div>
         </div>
 
-        @if(Model.IsAvail)
+        @if(Model.Book.IsAvail)
         {
             <a  onclick="AddToBasket()" class="cartBtn atext" style="margin-top: 15px;">
                 افزودن به سبد
@@ -47,9 +47,53 @@
 
     </div>
 
-
-
 </div>
+
+<div class="comment-section">
+<h3>نظرات کاربران</h3>
+
+@if(Model.Comments!=null && Model.Comments.Any())
+{
+    <div class="comment-list">
+
+        @foreach(var comment in Model.Comments)
+        {
+       <div class="comment-box">
+           <div class="comment-header">
+               <span class="user-name">@comment.Name</span>
+               <span class="comment-date">@comment.CreatedAt.ToString("yyyy/MM/dd HH:mm")</span>
+               </div>
+               <p class="comment-text">@comment.Text</p>
+               </div>
+        }
+        </div>
+        <div class="sort-buttons">
+            <a asp-action="Index" asp-route-id="@Model.Book.Id" asp-route-sortorder="newset">جدیدترین</a>
+            <a asp-action="Index" asp-route-id="@Model.Book.Id" asp-route-sortorder="oldest">قدیمی ترین</a>
+            </div>
+}
+else
+{
+   <p class="no-comments">هنوز نظری ثبت نشده است</p>
+}
+<h3>افزودن نظر جدید</h3>
+    <form asp-action="AddComment" method="post" class="comment-form">
+
+        <input type="hidden" name="ProductId" value="@Model.Book.Id" />
+        <label>نام</label>
+        <input type="text" name="Name" required />
+        <label>نظر</label>
+        <textarea name="Text" required></textarea>
+        <button type="submit">ارسال نظر</button>
+    </form>
+
+    </div>
+
+
+
+
+
+
 
 @section Scripts
 {

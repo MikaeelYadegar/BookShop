@@ -4,6 +4,7 @@ using DatAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatAccess.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250402103732_Comment")]
+    partial class Comment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +173,7 @@ namespace DatAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("bookId")
+                    b.Property<int>("bookId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -428,8 +431,10 @@ namespace DatAccess.Migrations
             modelBuilder.Entity("DatAccess.Models.Comment", b =>
                 {
                     b.HasOne("DatAccess.Models.Book", "book")
-                        .WithMany()
-                        .HasForeignKey("bookId");
+                        .WithMany("Comment")
+                        .HasForeignKey("bookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("book");
                 });
@@ -498,6 +503,8 @@ namespace DatAccess.Migrations
             modelBuilder.Entity("DatAccess.Models.Book", b =>
                 {
                     b.Navigation("BasketItems");
+
+                    b.Navigation("Comment");
                 });
 #pragma warning restore 612, 618
         }

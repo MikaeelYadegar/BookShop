@@ -7,6 +7,7 @@ using DatAccess.Models;
 using DatAccess.Repositories.AuthorRepo;
 using DatAccess.Repositories.BasketRepo;
 using DatAccess.Repositories.BookRepo;
+using DatAccess.Repositories.CommentRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 builder.Services.AddIdentity<User, Role>(Options =>
 {
