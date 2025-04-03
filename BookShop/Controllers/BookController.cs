@@ -6,6 +6,7 @@ using DatAccess.Repositories.CommentRepo;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Diagnostics;
 using System.Drawing.Printing;
 
@@ -24,7 +25,9 @@ namespace BookShop.Controllers
         {
             var book = await _bookService.GetBooksById(id);
             if(book==null)return NotFound();
+     
             var comments = await _bookService.GetCommentByID(id);
+
        
            
             switch(sortorder)

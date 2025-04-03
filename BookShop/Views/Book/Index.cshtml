@@ -1,4 +1,5 @@
-﻿@using DatAccess.Models
+﻿@using Core.Extension
+@using DatAccess.Models
 @model BookShop.Models.BookDetailsViewModel
 @{
     ViewData["Title"] = "Index";
@@ -61,9 +62,18 @@
        <div class="comment-box">
            <div class="comment-header">
                <span class="user-name">@comment.Name</span>
-               <span class="comment-date">@comment.CreatedAt.ToString("yyyy/MM/dd HH:mm")</span>
+                <span class="comment-date">@comment.CreatedAt.ToPersianDateString()</span>
                </div>
                <p class="comment-text">@comment.Text</p>
+                    <div class="rating">
+                   @for(int i=1;i<=5;i++)
+                   {
+                            <span class="star @((i<=comment.Rating)?"filled":"")">*</span>
+                   }
+                        <span class="rating-status @(comment.Rating<=1 ?"low":comment.Rating<=3 ?"high":"medium")">
+                            @(comment.Rating<=1 ? "ضعیف":comment.Rating<=3 ?"متوسط":"عالی")
+                        </span>
+                   </div>
                </div>
         }
         </div>
@@ -77,18 +87,59 @@ else
    <p class="no-comments">هنوز نظری ثبت نشده است</p>
 }
 <h3>افزودن نظر جدید</h3>
-    <form asp-action="AddComment" method="post" class="comment-form">
+    <form id="comment-Form" asp-action="AddComment" method="post"  class="comment-form" >
 
         <input type="hidden" name="ProductId" value="@Model.Book.Id" />
         <label>نام</label>
-        <input type="text" name="Name" required />
+        <input type="text" id="Name" name="Name" required />
+        <span class="error-message" id="nameError"></span>
         <label>نظر</label>
-        <textarea name="Text" required></textarea>
-        <button type="submit">ارسال نظر</button>
+        <textarea id="Text" name="Text" required></textarea>
+         <span class="error-message" id="textError"></span>
+         <label>امتیاز به محصول</label>
+         <div class="rating">
+             <input type="radio" id="star5" name="Rating" value="5" /><label for="star5">*</label>
+            <input type="radio" id="star4" name="Rating" value="4" /><label for="star4">*</label>
+            <input type="radio" id="star3" name="Rating" value="3" /><label for="star3">*</label>
+            <input type="radio" id="star2" name="Rating" value="2" /><label for="star2">*</label>
+            <input type="radio" id="star1" name="Rating" value="1" /><label for="star1">*</label>
+         </div>
+         <span id="ratingError" class="error-message"></span>
+        <button type="submit" onclick="validateForm(event)">ارسال نظر</button>
+    
     </form>
 
     </div>
 
+<script>
+    function validateForm(event){
+   event.preventDefault();
+    
+        let isvalid=true;
+        let name=document.getElementById("Name").value.trim();
+        let text=document.getElementById("Text").value.trim();
+        let nameError=document.getElementById("nameError");
+        let textError=document.getElementById("textError");
+        nameError.innerText="";
+        textError.innerText="";
+        if(name==="")
+        {
+            console.log("نام وارد نشده");
+            nameError.innerText="لطفا نام خود را وارد نمایید";
+            isvalid=false;
+        }
+        if(text==="")
+        {
+            console.log("متن وارد نشده");
+            textError.innerText="لطفا متن را وارد نمایید";
+            isvalid=false;
+        }
+        if(isvalid)
+        {
+            document.getElementById("comment-Form").submit();
+        }
+    }
+</script>
 
 
 

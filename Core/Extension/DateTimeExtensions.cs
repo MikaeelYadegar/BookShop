@@ -15,7 +15,9 @@ namespace Core.Extension
             int year = persianCalendar.GetYear(dateTime);
             int month=persianCalendar.GetMonth(dateTime);
             int day=persianCalendar.GetDayOfMonth(dateTime);
-            return $"{year:0000}/{month:00}/{day:00}";
+            int hour=persianCalendar.GetHour(dateTime);
+            int min=persianCalendar.GetMinute(dateTime);
+            return $"({hour:00}:{min:00}){year:0000}/{month:00}/{day:00}";
         }
     }
 }

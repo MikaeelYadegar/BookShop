@@ -121,8 +121,10 @@ namespace Core.BookService
         }
         public async Task<List<Comment>> GetCommentByID(int productId)
         {
-            return await _bookRepository.GetCommentByID(productId);
+           return await _bookRepository.GetCommentByID(productId);
+ 
         }
+
         public async Task AddComment(Comment comment)
         {
          if(comment.ProductId==0)
@@ -137,6 +139,7 @@ namespace Core.BookService
         {
             await _bookRepository.DeleteComment(commentId);
         }
+
 
     }
 }

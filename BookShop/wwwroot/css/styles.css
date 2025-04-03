@@ -698,3 +698,49 @@ input[type="password"] {
 {
     background-color:#e65c00;
 }
+.error-message
+{
+    color:red;
+    font-size:14px;
+    margin-top:5px;
+    display:block;
+}
+.rating{
+   
+    display:flex;
+    font-size:30px;
+    align-items:center;
+    gap:10px;
+}
+.rating input{
+    display:none;
+}
+.rating label{
+    color:gray;
+    cursor:pointer
+}
+.rating input:checked ~label{
+    color:gold;
+}
+.rating input:hover ~label{
+    color:gold;
+}
+.star{
+    color:gray;
+   font-weight:bold;
+}
+.star.filled{
+    color:gold;
+}
+.rating-status.low{
+    color:red;
+    font-size:20px;
+}
+.rating-status.medium {
+    color: green;
+    font-size: 20px;
+}
+.rating-status.high {
+    color: orange;
+    font-size: 20px;
+}
