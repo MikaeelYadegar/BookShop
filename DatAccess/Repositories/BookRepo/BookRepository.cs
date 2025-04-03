@@ -1,5 +1,6 @@
 ﻿using DatAccess.Data;
 using DatAccess.Models;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq.Expressions;
@@ -68,13 +69,36 @@ public class BookRepository : IBookRepository
         return await _context.Books.Include(a=>a.Authore).FirstOrDefaultAsync(x => x.Id == id);    
     }
 
-    public async Task<List<Comment>> GetCommentByID(int productId)
+    public async Task<IEnumerable<Comment>> GetCommentByBookIdAsync(int productId, int pageNumber, int pageSize)
     {
-        return await _context.Comments.Where(c => c.ProductId== productId)
-                                        .OrderByDescending(c=>c.CreatedAt)
+         return await _context.Comments
+                    .Where(c=>c.ProductId== productId)
+                    .OrderBy(c=>c.CreatedAt)
+                    .Skip((pageNumber-1)*pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+    }
+
+    public async Task<List<Comment>> GetCommentByID(int productId,int pageNumber,int pagSize)
+    {
+        return await _context.Comments.Where(c => c.ProductId == productId)
+                                        .OrderByDescending(c => c.CreatedAt)
+                                        .Skip((pageNumber-1)*pagSize)
+                                        .Take(pagSize)
+                                      
                                         .ToListAsync();
                         
             
+    }
+    public async Task <int> GetCommentCount(int productId)
+    {
+        return await _context.Comments.CountAsync(c=>c.ProductId == productId);
+    }
+
+    public async Task<int> GetCommentCountByBookIdAsync(int productId)
+    {
+       return await _context.Comments
+            .Where(c=>c.ProductId== productId).CountAsync();
     }
 
     public async Task Update(Book book)

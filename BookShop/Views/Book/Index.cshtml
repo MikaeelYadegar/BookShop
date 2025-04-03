@@ -13,13 +13,13 @@
     <input type="hidden" id="bookId" value="@Model.Book.Id" />
     <div class="headerItems">
         <h1>
-          @Model.Book.Title
+            @Model.Book.Title
         </h1>
         <p>
-           @Model.Book.Description
+            @Model.Book.Description
         </p>
         <p>
-             @Model.Book.Authore.Name
+            @Model.Book.Authore.Name
         </p>
 
         <div class="bookPrice">
@@ -51,35 +51,48 @@
 </div>
 
 <div class="comment-section">
-<h3>نظرات کاربران</h3>
+    <h3>نظرات کاربران</h3>
 
-@if(Model.Comments!=null && Model.Comments.Any())
-{
-    <div class="comment-list">
+    @if(Model.Comments!=null && Model.Comments.Any())
+    {
+        <div class="comment-list">
 
-        @foreach(var comment in Model.Comments)
-        {
-       <div class="comment-box">
-           <div class="comment-header">
-               <span class="user-name">@comment.Name</span>
-                <span class="comment-date">@comment.CreatedAt.ToPersianDateString()</span>
-               </div>
-               <p class="comment-text">@comment.Text</p>
+            @foreach(var comment in Model.Comments)
+            {
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <span class="user-name">@comment.Name</span>
+                        <span class="comment-date">@comment.CreatedAt.ToPersianDateString()</span>
+                    </div>
+                    <p class="comment-text">@comment.Text</p>
                     <div class="rating">
-                   @for(int i=1;i<=5;i++)
-                   {
+                        @for(int i=1;i<=5;i++)
+                        {
                             <span class="star @((i<=comment.Rating)?"filled":"")">*</span>
-                   }
+                        }
                         <span class="rating-status @(comment.Rating<=1 ?"low":comment.Rating<=3 ?"high":"medium")">
                             @(comment.Rating<=1 ? "ضعیف":comment.Rating<=3 ?"متوسط":"عالی")
                         </span>
-                   </div>
-               </div>
-        }
+                    </div>
+                </div>
+            }
         </div>
         <div class="sort-buttons">
             <a asp-action="Index" asp-route-id="@Model.Book.Id" asp-route-sortorder="newset">جدیدترین</a>
             <a asp-action="Index" asp-route-id="@Model.Book.Id" asp-route-sortorder="oldest">قدیمی ترین</a>
+        </div>
+        <div class="pageination">
+      
+            @if(Model.CurrentPage>1)
+            {
+                <a class="btn btn-primary" href="?id=@Model.ProductId&pageNumber=@(Model.CurrentPage-1)">صفحه قبل</a>
+            }
+            <span class="page-info">صفحه @Model.CurrentPage از  @Model.TotalPages</span>
+            @if(Model.CurrentPage<Model.TotalPages)
+            {
+                <a class="btn btn-primary" href="?id=@Model.ProductId&pageNumber=@(Model.CurrentPage+1)">صفحه بعد</a>
+            } 
+
             </div>
 }
 else

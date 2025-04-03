@@ -116,12 +116,14 @@ namespace Core.BookService
                 Items = bookDtos,
                 Page = page,
                 TotalPage = totalpage,
+                
             };
             return result;
         }
-        public async Task<List<Comment>> GetCommentByID(int productId)
+        public async Task<List<Comment>> GetCommentByID(int productId,int pageNumber=1,int pageSize=5)
         {
-           return await _bookRepository.GetCommentByID(productId);
+          // return await _bookRepository.GetCommentByID(productId);
+           return await _bookRepository.GetCommentByID(productId,pageNumber,pageSize);
  
         }
 
@@ -139,7 +141,10 @@ namespace Core.BookService
         {
             await _bookRepository.DeleteComment(commentId);
         }
-
+        public async Task<int> GetCommentCountByBookIdAsync(int productId)
+        {
+            return await _bookRepository.GetCommentCountByBookIdAsync(productId);   
+        }
 
     }
 }

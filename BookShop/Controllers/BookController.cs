@@ -21,16 +21,21 @@ namespace BookShop.Controllers
             _bookService = bookService;
            
         }
-        public async Task<IActionResult> Index(int id,string sortorder)
+        public async Task<IActionResult> Index(string sortorder,int id,int pageNumber=1)
         {
             var book = await _bookService.GetBooksById(id);
             if(book==null)return NotFound();
-     
-            var comments = await _bookService.GetCommentByID(id);
+            int pagesize = 5;
+            var comments = await _bookService.GetCommentByID(id,pageNumber,pagesize);
+            var totalComent=await _bookService.GetCommentCountByBookIdAsync(id);
+            var totalPages=(int)Math.Ceiling((double)totalComent/pagesize);
+            //int totalcount = await _bookService.GetCommentCount(productId);
+            //ViewBag.TotalPage = (int)Math.Ceiling((double)totalcount / pagesize);
+            //ViewBag.CurrentPage = page;
+            //ViewBag.ProductId = productId;
 
-       
-           
-            switch(sortorder)
+
+            switch (sortorder)
             {
                 case "newset":
                     comments = comments.OrderByDescending(c => c.CreatedAt).ToList();
@@ -42,7 +47,10 @@ namespace BookShop.Controllers
             var model = new BookDetailsViewModel
             {
                 Book = book,
-                Comments = comments
+                Comments = comments,
+                CurrentPage= pageNumber,
+                TotalPages = totalPages,
+                ProductId=id
             };
             return View(model);
         }
@@ -75,7 +83,6 @@ namespace BookShop.Controllers
             var book = await _bookService.GetBooksById(id);
             return PartialView(book);
         }
-  
         //public async Task<IActionResult> AddComment(Comment comment)
         //{
         //    if(ModelState.IsValid)

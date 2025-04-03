@@ -13,8 +13,9 @@ public interface IBookRepository
     Task Update(Book book);
     Task Delete(Book book);
     Task Delete(int id);    
-   Task< List <Comment>> GetCommentByID(int productId);
+   Task< List <Comment>> GetCommentByID(int productId,int pageNumber,int pageSize);
     Task AddComment(Comment comment);
     Task DeleteComment(int commentId);
-
+    Task<IEnumerable <Comment>> GetCommentByBookIdAsync(int productId,int pageNumber,int pageSize);
+    Task<int> GetCommentCountByBookIdAsync(int productId);
 }
