@@ -8,8 +8,18 @@
 <div class="myHeader">
     <div class="headerItems">
         <img class="headImg" src="/api/File/GetFile?filename=@Model.Book.Img" alt="@Model.Book.Title">
-    </div>
 
+    </div>
+    <div class="compare-icon-container">
+
+    <form method="get" action="/Book/AddToCompare" >
+        <input type="hidden" name="productId" value="@Model.Book.Id" />
+        <button type="submit" class="compare-icon-btn">
+            <img src="~/asstes/img/Compare.jpg" alt="مقایسه"  class="compare-icon-img"/>
+            <div class="compare-tooltip">افزودن به مقایسه</div>
+        </button>
+    </form>
+    </div>
     <input type="hidden" id="bookId" value="@Model.Book.Id" />
     <div class="headerItems">
         <h1>

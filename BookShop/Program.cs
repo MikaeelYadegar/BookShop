@@ -29,6 +29,20 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly= true;
+    options.Cookie.IsEssential= true;
+});
+builder.Services.AddControllersWithViews();
+
+
+
+
+
+
 builder.Services.AddIdentity<User, Role>(Options =>
 {
     Options.Password.RequireDigit = false;
@@ -67,7 +81,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

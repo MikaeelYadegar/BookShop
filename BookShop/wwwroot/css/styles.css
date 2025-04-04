@@ -769,3 +769,47 @@ input[type="password"] {
     font-size:16px;
     color:#333;
 }
+.compare-icon-container
+{
+    position:absolute;
+    top:50%;
+    left:77%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+}
+.compare-icon-btn
+{
+    background:none;
+    border:none;
+    position:relative;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.compare-icon-img{
+    width:40px;
+    height:40px;
+    transition:transform 0.3s ease,filter 0.3s ease;
+}
+.compare-icon-btn:hover .compare-icon-img
+{
+    transform:scale(1.2);
+    filter:brightness(1.2)
+}
+.compare-tooltip{
+    opacity:0;
+    visibility:hidden;
+    background-color:#333;
+    color:#fff;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:4px;
+    margin-top:6px;
+    transition:opacity 0.3s ease;
+}
+.compare-icon-btn:hover .compare-tooltip
+{
+    opacity:1;
+    visibility:visible;
+}

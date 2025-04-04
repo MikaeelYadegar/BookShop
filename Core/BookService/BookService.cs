@@ -145,6 +145,9 @@ namespace Core.BookService
         {
             return await _bookRepository.GetCommentCountByBookIdAsync(productId);   
         }
-
+        public  List<Book>GetBooksByIds(List<int>ids)
+        {
+            return _bookRepository.GetAll().Where(x=>ids.Contains(x.Id)).ToList();
+        }
     }
 }

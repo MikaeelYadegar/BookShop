@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace BookShop.Controllers
 {
@@ -83,25 +85,50 @@ namespace BookShop.Controllers
             var book = await _bookService.GetBooksById(id);
             return PartialView(book);
         }
+        [HttpGet]
+        public IActionResult AddToCompare(int productId)
+        {
+            var campareList = HttpContext.Session.GetString("CompareList");
+            List<int> productIds = string.IsNullOrEmpty(campareList)
+                            ?new List<int>()
+                            :JsonSerializer.Deserialize<List<int>>(campareList);
+            if (!productIds.Contains(productId) && productIds.Count < 3)
+            {
+                productIds.Add(productId);
+            }
+                HttpContext.Session.SetString("CompareList", JsonSerializer.Serialize(productIds));
+            
+            return RedirectToAction("Compare");
+        }
+        [HttpGet]
+        public IActionResult Compare()
+        {
+            var CompareList = HttpContext.Session.GetString("CompareList");
+            List<int> productIds = string.IsNullOrEmpty(CompareList)
+                ? new List<int>()
+                : JsonSerializer.Deserialize<List<int>>(CompareList);
+            var products = _bookService.GetBooksByIds(productIds);
+            return View(products);
+        }
         //public async Task<IActionResult> AddComment(Comment comment)
         //{
         //    if(ModelState.IsValid)
         //    {
         //        if(Book.bok)
         //    }
-          
-            //if (comment.ProductId==0)
-            //{
-            //    var errors=ModelState.Values.SelectMany(v=>v.Errors)
-            //                                 .Select(e=>e.ErrorMessage)
-            //                                 .ToList();
-            //    TempData["nok"] = "خطا در ارسال نظر:" +string.Join(",",errors);
-            //    return RedirectToAction("Index", new { id = comment.ProductId });
-            //}
-            //await _bookService.AddComment(comment);
-            //TempData["ok"] = "درسته";
-           
-            //return RedirectToAction("Index", new { id = comment.ProductId });
+
+        //if (comment.ProductId==0)
+        //{
+        //    var errors=ModelState.Values.SelectMany(v=>v.Errors)
+        //                                 .Select(e=>e.ErrorMessage)
+        //                                 .ToList();
+        //    TempData["nok"] = "خطا در ارسال نظر:" +string.Join(",",errors);
+        //    return RedirectToAction("Index", new { id = comment.ProductId });
+        //}
+        //await _bookService.AddComment(comment);
+        //TempData["ok"] = "درسته";
+
+        //return RedirectToAction("Index", new { id = comment.ProductId });
         }
         //    var comments = await _bookService.GetCommentByID(comment.ProductId);
         //        var book = await _bookService.GetBooksById(comment.ProductId);
