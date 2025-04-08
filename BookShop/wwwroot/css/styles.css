@@ -813,3 +813,107 @@ input[type="password"] {
     opacity:1;
     visibility:visible;
 }
+.compare-container{
+    box-sizing:border-box;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:20px;
+   max-width:100%;
+   flex-wrap:nowrap;
+   overflow-x:auto;
+   margin:auto;
+
+}
+.product-card{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:30px;
+    border:4px double whitesmoke;
+    border-radius:15px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    padding:20px;
+    background-color:crimson;
+ /*   width:30%;*/
+    /*border:1px solid #ddd;*/
+/*    border-radius:10px;
+    padding:16px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);*/
+    box-sizing:border-box;
+  
+    /*background-color:#fff;*/
+}
+.product-list {
+    display: flex;
+    flex: 1 1 33.33%;
+    flex-direction: row;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    align-items: center;
+}
+.product-list:hover{
+    transform:scale(1.05s);
+}
+@media(max-width:1024px)
+{
+    .product-list{
+        flex: 1 1 48%;
+    }
+}
+@media(max-width:768px) {
+    .product-list {
+        flex: 1 1 100%;
+    }
+}
+@media(max-width:500px)
+{
+    .compare-container{
+        justify-content:center;
+        gap:10px;
+    }
+     .product-list {
+        flex: 1 1 100%;
+    }
+}
+.image-compare{
+    transition:transform 0.3s ease;
+    border:2px solid white;
+    
+    border-radius:15px;
+    display:flex;
+    object-fit:cover
+    overflow:hidden;
+    justify-content:center;
+    align-items:center;
+    object-position:center;
+}
+
+.image-compare:hover{
+    animation:shake 0.5s;
+    transform:scale(1.05);
+}
+@keyframes shake{
+    0%{
+        transform:translate(0,0) scale(1.05);
+    }
+    25% {
+        transform: translate(-2px,-2px) scale(1.05);
+    }
+    50% {
+        transform: translate(2px,2px) scale(1.05);
+    }
+    75% {
+        transform: translate(-2px,-2px) scale(1.05);
+    }
+    100% {
+        transform: translate(0,0) scale(1.05);
+    }
+}
