@@ -889,7 +889,7 @@ input[type="password"] {
     
     border-radius:15px;
     display:flex;
-    object-fit:cover
+    object-fit:cover;
     overflow:hidden;
     justify-content:center;
     align-items:center;
