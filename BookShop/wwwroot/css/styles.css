@@ -193,15 +193,19 @@ body{
     display: flex;
     justify-content: space-between;
   }
-  
-  .about-us, .important-links, .social-icons {
+.about-add{
+    width:30px;
+    height:300px;
+    
+}
+.about-us, .important-links, .social-icons  {
     width: 30%;
-  }
-  
-  .about-us h3, .important-links h3, .social-icons h3 {
-    border-bottom: 1px solid #fff;
-    padding-bottom: 10px;
-  }
+}
+
+    .about-us h3, .important-links h3, .social-icons h3, about-add h3 {
+        border-bottom: 1px solid #fff;
+        padding-bottom: 10px;
+    }
   
   .important-links ul {
     list-style-type: none;
@@ -235,10 +239,10 @@ body{
     footer {
         flex-direction: column;
       }
-      
-      .about-us, .important-links, .social-icons {
+
+    .about-us, .important-links, .social-icons, .about-add {
         width: 100%;
-      }
+    }
  }
 
  

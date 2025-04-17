@@ -76,15 +76,49 @@
             <div class="about-us">
                 <h3>درباره ما</h3>
                 <p>بزودی یه سایت خوب توسط میکاییل یادگار راه اندازی می شود</p>
+            
             </div>
             <div class="important-links">
                 <h3>لینک‌های مهم</h3>
                 <ul>
-                    <li><a href="#">خانه</a></li>
-                    <li><a href="#">محصولات</a></li>
-                    <li><a href="#">خدمات</a></li>
-                    <li><a href="#">تماس</a></li>
+                    <li>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <img src="~/asstes/img/HomeIcon.png" alt="خانه" style="width:30px;height:30px;" />
+                        <a href="#">خانه</a>
+                        </li>
+                    <li>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <img src="~/asstes/img/Product2-removebg-preview.png" alt="محصولات" style="width:30px;height:30px;" />
+                        <a href="/Book/BookList">محصولات</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <img src="~/asstes/img/ServiceIcon-removebg-preview.png" alt="خدمات" style="width:30px;height:30px;" />
+                        <a href="#">خدمات</a>
+                        </div>
+                    </li>
+                    @* <li><a href="#">تماس</a></li> *@
+
+                    <li>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <img src="~/asstes/img/CallIcon-removebg-preview.png" alt="تماس" style="width:30px;height:30px;" />
+                        <a href="tel:09129254974">تماس با ما: 09129254974</a>
+                        </div>
+                    </li>
                 </ul>
+            </div>
+            <div class="about-us">
+                <h3>آدرس ما</h3>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <img src="~/asstes/img/MapPin-removebg-preview.png" alt="مکان" style="width:30px;height:30px;" />
+                <p style="margin:0">تهران-شهر جدید اندیشه</p>
+                </div>
+                <div style="border-radius:10px;overflow:hidden;margin-top:5px;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1619.8246911589029!2d51.0189563!3d35.7102448!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8ded00287d7cff%3A0x85dc5420653b316c!2z2YXYrNiq2YXYuSDZhdiz2qnZiNmG24wg27nbtiDZiNin2K3Yr9mHINio2YbZgdi02Yc!5e0!3m2!1sen!2s!4v1744881470407!5m2!1sen!2s"
+                    width="90%" height="110" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+               </div>
             </div>
             <div class="social-icons">
                 <h3>ما را دنبال کنید</h3>
