@@ -3,6 +3,18 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="slider">
+    <img src="~/asstes/img/Baner Image 3.jpg" class="active" />
+    <img src="~/asstes/img/AIRPOD.jpg" />
+    <img src="~/asstes/img/Hyundai.jpg" />
+    <img src="~/asstes/img/hp.jpg" />
+</div>
+<div class="dots">
+    <span onclick="goToImage(0)" class="active"></span>
+    <span onclick="goToImage(1)"></span>
+    <span onclick="goToImage(2)"></span>
+    <span onclick="goToImage(3)"></span>
+</div>
 <header class="myHeader">
     <div class="headerItems">
         <h1>
@@ -81,3 +93,23 @@
           }
     </script>
 }
+<script>
+    let currentindex=0;
+    const images=document.querySelectorAll('.slider img');
+    const dots=document.querySelectorAll('.dots span');
+
+    function showImage(index){
+        images.forEach(img=>img.classList.remove('active'));
+        dots.forEach(dot=>dot.classList.remove('active'));
+        images[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
+    function goToImage(index){
+    currentindex=index;
+    showImage(index);
+    }
+    setInterval(()=>{
+currentindex=(currentindex+1) % images.length;
+        showImage(currentindex);
+    },3000);
+</script>
