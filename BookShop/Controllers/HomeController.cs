@@ -1,6 +1,8 @@
+using System.Buffers.Text;
 using System.Diagnostics;
 using BookShop.Models;
 using Core.BookService;
+using Core.StoryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,19 +12,32 @@ namespace BookShop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly BookService _bookService;
+        private readonly IStoryService _storyService;
 
-        public HomeController(ILogger<HomeController> logger,BookService bookService)
+        public HomeController(ILogger<HomeController> logger,BookService bookService,IStoryService storyService)
         {
             _logger = logger;
             _bookService = bookService;
+            _storyService = storyService;
         }
 
-        public async Task <IActionResult> Index( )
+        public IActionResult Index( )
         {
-           
-            return View();
+         var storis=_storyService.GetAllStories()
+                .OrderByDescending(s=>s.CreatedAt)
+                .Take(5)
+                .ToList();
+            return View(storis);
         }
-
+        [HttpGet]
+        public IActionResult GetStoryData(int id)
+        {
+            var story=_storyService.GetStoryById(id);
+            if(story == null) 
+                return NotFound();
+            var base64=Convert.ToBase64String(story.MediaData);
+            return Json(new { base64, mimeType = story.MediaMimeType });
+        }
         [Authorize]
         public IActionResult aboutUs()
         {

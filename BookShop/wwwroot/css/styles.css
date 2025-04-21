@@ -86,9 +86,59 @@ body{
     .dots span.active{
         background-color:red;
     }
+.story-container{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:30px;
+}
+.story-outer{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    padding:4px;
+    background:conic-gradient(red,orange,yellow,green,blue,indigo,violet,red);
+    transform:rotate(-45deg);
+    cursor:pointer;
+}
+.story-inner{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    background:white;
+    transform:rotate(45deg)
+}
+.story-inner img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+}
 
-@media (max-width : 600px) {
-    .mobileNav{
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+
+}
+.popup-content img,popup-content video{
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
+}
+
+
+
+    @media (max-width : 600px) {
+        .mobileNav{
         display: flex;
         justify-content: space-between;
     }

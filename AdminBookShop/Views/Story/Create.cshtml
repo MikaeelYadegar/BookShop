@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+<div class="form-group">
+    <label>Select Image/Video</label>
+    <input type="file" name="file" class="form-control" />
+</div>    
+<br />
+<button type="submit" class="btn btn-primary">Upload</button>
+<a asp-action="Index" class="btn btn-secondary">Show All Story</a>
+</form>

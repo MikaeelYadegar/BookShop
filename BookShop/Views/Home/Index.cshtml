@@ -1,4 +1,5 @@
-﻿
+﻿@using DatAccess.Models
+@model List<Story>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -14,6 +15,26 @@
     <span onclick="goToImage(1)"></span>
     <span onclick="goToImage(2)"></span>
     <span onclick="goToImage(3)"></span>
+</div>
+<div  class="story-container">
+    @foreach(var story in Model)
+    {
+        <div class="story-outer" onclick="showStory('@story.Id')">
+            <div class="story-inner">
+            <img src="data:@story.MediaMimeType;base64,@Convert.ToBase64String(story.MediaData)" />
+              </div>
+            </div>
+    }
+</div>
+<div id="story-popup"class="popup" style="display:none">
+    <div class="popup-content">
+        <img id="popup-img"src=""style="display:none" />
+        <video id="popup-video"controls autoplay style="display:none">
+            <source id="popup-video-source" src="" type="" />
+        </video>
+    </div>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe id="storyFrame" class="modal-content"frameborder="0"></iframe>
 </div>
 <header class="myHeader">
     <div class="headerItems">
@@ -112,4 +133,37 @@
 currentindex=(currentindex+1) % images.length;
         showImage(currentindex);
     },3000);
+</script>
+
+<script>
+function showStory(id){
+        fetch('/Home/GetStoryData/${id}')
+        .then(res=>res.json())
+        .then(data=>{
+            const popup=document.getElementById('story-popup');
+            const img=document.getElementById('popup-img');
+            const video=document.getElementById('popup-video');
+            const VideoSource=document.getElementById('popup-video-source');
+            if(data.mimeType.startsWith("image"))
+            {
+                img.src='data:${data.mimeType};base64,${data.base64}';
+                img.style.display='block';
+                video.style.display='none';
+            }
+                else  if(data.mimeType.startsWith("video"))
+                {
+                        VideoSource.src='data:${data.mimeType};base64,${data.base64}';
+                        video.onload();
+                        video.style.display='block';
+                        img.style.display='none';
+                }
+                popup.style.display='flex';
+                setTimeout(()=>{
+                    popup.style.display='none';
+                    video.onpause();
+
+                },5000);
+            
+        }
+}   
 </script>
