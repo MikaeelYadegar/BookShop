@@ -19,22 +19,34 @@
 <div  class="story-container">
     @foreach(var story in Model)
     {
-        <div class="story-outer" onclick="showStory('@story.Id')">
-            <div class="story-inner">
-            <img src="data:@story.MediaMimeType;base64,@Convert.ToBase64String(story.MediaData)" />
-              </div>
-            </div>
+
+        var base64 = Convert.ToBase64String(story.MediaData);
+        var mime = story.MediaMimeType;
+        var isVideo = mime.StartsWith("video");
+        <div class="story-wrapper" >
+            <div class="story-border"></div>
+@*             <img src="data:@mime;base64,@base64" class="story-image" data-id="@story.Id" onclick="showStoryModal('@mime','@base64','@isVideo.ToString().ToLower()')" />
+ *@         
+            @if(isVideo)
+            {
+                <video class="story-image" src="data:@mime;base64,@base64"muted onclick="showStory(this)"></video>
+            }
+            else
+            {
+                <img class="story-image" src="data:@mime;base64,@base64" onclick="showStory(this)" />
+            }
+
+</div>
+
+              
     }
 </div>
-<div id="story-popup"class="popup" style="display:none">
-    <div class="popup-content">
-        <img id="popup-img"src=""style="display:none" />
-        <video id="popup-video"controls autoplay style="display:none">
-            <source id="popup-video-source" src="" type="" />
-        </video>
-    </div>
-    <span class="close" onclick="closeModal()">&times;</span>
-    <iframe id="storyFrame" class="modal-content"frameborder="0"></iframe>
+<div id="storyModal" class="modal1" onclick="hideStory()">
+    <span class="close">&times;</span>
+        <div class="modal-content1">
+            <img id="modalImage" style="display:none;" />
+            <video id="modalVideo" controls style="display:none;"></video>
+        </div>
 </div>
 <header class="myHeader">
     <div class="headerItems">
@@ -114,6 +126,7 @@
           }
     </script>
 }
+
 <script>
     let currentindex=0;
     const images=document.querySelectorAll('.slider img');
@@ -134,36 +147,4 @@ currentindex=(currentindex+1) % images.length;
         showImage(currentindex);
     },3000);
 </script>
-
-<script>
-function showStory(id){
-        fetch('/Home/GetStoryData/${id}')
-        .then(res=>res.json())
-        .then(data=>{
-            const popup=document.getElementById('story-popup');
-            const img=document.getElementById('popup-img');
-            const video=document.getElementById('popup-video');
-            const VideoSource=document.getElementById('popup-video-source');
-            if(data.mimeType.startsWith("image"))
-            {
-                img.src='data:${data.mimeType};base64,${data.base64}';
-                img.style.display='block';
-                video.style.display='none';
-            }
-                else  if(data.mimeType.startsWith("video"))
-                {
-                        VideoSource.src='data:${data.mimeType};base64,${data.base64}';
-                        video.onload();
-                        video.style.display='block';
-                        img.style.display='none';
-                }
-                popup.style.display='flex';
-                setTimeout(()=>{
-                    popup.style.display='none';
-                    video.onpause();
-
-                },5000);
-            
-        }
-}   
-</script>
+<script src="~/js/Story.js"></script>
