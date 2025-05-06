@@ -1,0 +1,15 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h3>All Contact For Chat</h3>
+<ul>
+    @foreach(var userId in Model)
+    {
+        <li>
+            <a href="@Url.Action("Index","Chat",new {userId=userId})">Contact With @userId</a>
+        </li>
+    }
+</ul>
+

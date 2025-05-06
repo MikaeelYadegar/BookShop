@@ -1,5 +1,7 @@
+
 using Core.AuthoreService;
 using Core.BookService;
+using Core.ChatBoxService;
 using Core.FileUpload;
 using Core.OrderService;
 using Core.StoryService;
@@ -8,6 +10,7 @@ using DatAccess.Models;
 using DatAccess.Repositories.AuthorRepo;
 using DatAccess.Repositories.BasketRepo;
 using DatAccess.Repositories.BookRepo;
+using DatAccess.Repositories.ChatRepo;
 using DatAccess.Repositories.CommentRepo;
 using DatAccess.Repositories.StoryRepo;
 using Microsoft.AspNetCore.Identity;
@@ -32,8 +35,10 @@ builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStoryRepository,StoryRepository>();
 builder.Services.AddScoped<IStoryService,StoryService>();
-
+builder.Services.AddScoped<IChatMessageRepository,ChatMessageRepository>();
+builder.Services.AddScoped<ChatService>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSignalR();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -82,8 +87,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
+
+
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();

@@ -1,6 +1,8 @@
 using Core.AuthoreService;
 using Core.BookService;
+using Core.ChatBoxService;
 using Core.FileUpload;
+
 using Core.OrderService;
 using Core.StoryService;
 using DatAccess.Data;
@@ -8,6 +10,7 @@ using DatAccess.Models;
 using DatAccess.Repositories.AuthorRepo;
 using DatAccess.Repositories.BasketRepo;
 using DatAccess.Repositories.BookRepo;
+using DatAccess.Repositories.ChatRepo;
 using DatAccess.Repositories.StoryRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +36,9 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IStoryService, StoryService>();
+builder.Services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+builder.Services.AddScoped<ChatService>();
+
 
 builder.Services.AddIdentity<User, Role>(Options =>
 {

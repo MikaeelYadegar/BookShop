@@ -1,0 +1,25 @@
+﻿@using DatAccess.Models
+@model List<MessageChat>
+@{
+    ViewData["Title"] = "Index";
+    var receiverId = ViewBag.receiverId as string;
+}
+<div>
+    <h4>گفتگو با:@receiverId</h4>
+    @foreach(var msg in Model)
+    {
+        <div style="margin:5px 0;">
+            <strong>@msg.SenderId:</strong>@msg.Message<small style="color:gray;">@msg.Timestamp.ToShortTimeString()</small>
+            </div>
+    }
+    <form asp-action="Send" method="post">
+        <input type="hidden" name="receiverId" value="@receiverId" />
+        <textarea name="message" required></textarea>
+        <br />
+        <button type="submit">Send</button>
+
+    </form>
+</div>
+
+
+

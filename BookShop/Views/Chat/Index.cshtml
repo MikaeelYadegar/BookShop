@@ -1,0 +1,25 @@
+﻿@using DatAccess.Models
+@model List<MessageChat>
+
+@{
+
+    var receiverId = ViewBag.receiverId as string;
+}
+<div class="chat-container" >
+    <div class="chat-header">ارتباط با پشتیبانی</div>
+    <div class="chat-message">
+        @foreach(var msg in Model)
+        {
+            var messageClass = msg.SenderId == "admin" ? "recived" : "sent";
+            <div class="message1 @messageClass">
+            <strong>@msg.SenderId:</strong>@msg.Message<small>@msg.Timestamp.ToShortTimeString()</small>
+            </div>
+    }
+    </div>
+    <form class="chat-form" asp-action="Send"method="post">
+        <input type="hidden" name="receiverId" value="@receiverId" />
+        <textarea name="message" rows="2" placeholder=".....Please Write Your Text"></textarea>
+<button type="submit">Send</button>
+    </form>
+</div>
+
