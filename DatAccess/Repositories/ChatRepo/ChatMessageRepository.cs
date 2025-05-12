@@ -23,6 +23,35 @@ namespace DatAccess.Repositories.ChatRepo
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> DeleteMessageAsync(int messageId, string userId)
+        {
+            var message=await _context.MessageChats.FindAsync(messageId);
+            if(message==null||message.SenderId!=userId)
+            return false;
+            _context.MessageChats.Remove(message);
+            await _context.SaveChangesAsync();
+            return true;
+
+            
+        }
+
+        public async Task DeleteMessageAsync(MessageChat message)
+        {
+            _context.MessageChats.Remove(message);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditMessageAsync(int messageId, string newText, string userId)
+        {
+            var message=await _context.MessageChats.FindAsync(messageId);
+            if(message != null && message.SenderId == userId)
+            {
+                message.Message = newText;
+                message.IsEdited= true;
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<List<string>> GetChatUserIdAsync(string adminId)
         {
             return await _context.MessageChats
@@ -40,6 +69,17 @@ namespace DatAccess.Repositories.ChatRepo
                     m.SenderId == user2 && m.ReciverId == user1)
        .OrderBy(m => m.Timestamp)
        .ToListAsync();
+        }
+
+        public async Task<MessageChat> GetMessageByIdAsync(int id)
+        {
+            return await _context.MessageChats.FindAsync(id);
+        }
+
+        public async Task UpdateMessageAsync(MessageChat message)
+        {
+            _context.MessageChats.Update(message);
+            await _context.SaveChangesAsync();
         }
     }
 }

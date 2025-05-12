@@ -13,5 +13,8 @@ namespace DatAccess.Models
         public string ReciverId { get; set; }
         public string Message { get; set; }
         public DateTime Timestamp { get; set; }
+
+        public bool IsEdited {  get; set; }=false;
+        public bool IsDeleted { get; set; } =false;
     }
 }

@@ -12,8 +12,21 @@
         {
             var messageClass = msg.SenderId == "admin" ? "recived" : "sent";
             <div class="message1 @messageClass">
-            <strong>@msg.SenderId:</strong>@msg.Message<small>@msg.Timestamp.ToShortTimeString()</small>
+                <strong>@msg.SenderId:</strong>@msg.Message<small>@msg.Timestamp.ToShortTimeString()</small>
+                @if (msg.SenderId != receiverId)
+                {
+                  
+                    <form asp-action="DeleteMessage" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="@msg.Id" />
+                        <button type="submit">Deleted</button>
+                    </form>
+                }
             </div>
+          
+            
+  
+      
+           
     }
     </div>
     <form class="chat-form" asp-action="Send"method="post">
@@ -22,4 +35,5 @@
 <button type="submit">Send</button>
     </form>
 </div>
+
 

@@ -12,5 +12,9 @@ namespace DatAccess.Repositories.ChatRepo
         Task<List<MessageChat>> GetMessageAsync(string user1, string user2);
         Task AddMessageAsync(MessageChat message);
         Task<List<string>> GetChatUserIdAsync(string adminId);
+        Task EditMessageAsync(int messageId, string newText, string userId);
+        Task DeleteMessageAsync(MessageChat message);
+        Task UpdateMessageAsync(MessageChat message);
+        Task<MessageChat> GetMessageByIdAsync(int id);
     }
 }
