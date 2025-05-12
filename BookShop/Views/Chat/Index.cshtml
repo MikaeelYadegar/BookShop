@@ -10,7 +10,7 @@
     <div class="chat-message">
         @foreach(var msg in Model)
         {
-            var messageClass = msg.SenderId == "admin" ? "recived" : "sent";
+            var messageClass = msg.SenderId == "admin" ? "recived" : "sent" ;
             <div class="message1 @messageClass">
                 <strong>@msg.SenderId:</strong>@msg.Message<small>@msg.Timestamp.ToShortTimeString()</small>
                 @if (msg.SenderId != receiverId)
