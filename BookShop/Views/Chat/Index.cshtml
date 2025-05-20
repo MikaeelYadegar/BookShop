@@ -1,6 +1,6 @@
 ﻿@using DatAccess.Models
 @model List<MessageChat>
-
+@Html.AntiForgeryToken()
 @{
 
     var receiverId = ViewBag.receiverId as string;
@@ -20,12 +20,22 @@
                         <input type="hidden" name="id" value="@msg.Id" />
                         <button type="submit">Deleted</button>
                     </form>
+
+                   <button type="button" onclick="toggle(@msg.Id)">Edit</button>
+                    <div id="edit-box-@msg.Id" style="display:none;margin-top:5px;">
+                        <form asp-controller="Chat" asp-action="Edit" method="post">
+                            <input type="hidden" name="id" value="@msg.Id" />
+                            <input type="text" name="newMessage" value="@msg.Message" />
+                           
+                            <button type="submit">SetEdit</button>
+                        </form> 
+                        </div>
+                     
                 }
             </div>
-          
-            
-  
-      
+
+
+ 
            
     }
     </div>
@@ -35,5 +45,8 @@
 <button type="submit">Send</button>
     </form>
 </div>
+
+
+<script src="~/js/EditChatMessage.js"></script>
 
 

@@ -41,15 +41,16 @@ namespace DatAccess.Repositories.ChatRepo
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditMessageAsync(int messageId, string newText, string userId)
+        public async Task EditMessageAsync(int messageId, string newMessage)
         {
-            var message=await _context.MessageChats.FindAsync(messageId);
-            if(message != null && message.SenderId == userId)
+            var message = await _context.MessageChats.FindAsync(messageId);
+            if(message!=null)
             {
-                message.Message = newText;
-                message.IsEdited= true;
-                await _context.SaveChangesAsync();
+                message.Message=newMessage;
+                
             }
+            _context.MessageChats.Update(message);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<string>> GetChatUserIdAsync(string adminId)

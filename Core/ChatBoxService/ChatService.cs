@@ -28,14 +28,9 @@ namespace Core.ChatBoxService
         {
             return await _messageRepository.GetChatUserIdAsync(adminId);
         }
-        public async Task EditMessageAsync(int messageId,string newText,string userId)
+        public async Task EditMessageAsync(int messageId,string newMessage)
         {
-            var message=await _messageRepository.GetMessageByIdAsync(messageId);
-            if (message == null || message.SenderId != userId)
-                return;
-            message.Message=newText;
-            message.IsEdited=true;
-            await _messageRepository.UpdateMessageAsync(message);
+            await _messageRepository.EditMessageAsync(messageId,newMessage);
 
             
         }
@@ -46,6 +41,10 @@ namespace Core.ChatBoxService
                 return false;
             await _messageRepository.DeleteMessageAsync(message);
             return true;
+        }
+        public async Task <MessageChat>GetMessageByIdAsync(int messageId)
+        {
+            return await _messageRepository.GetMessageByIdAsync(messageId);
         }
     }
 }
