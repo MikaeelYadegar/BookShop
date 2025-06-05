@@ -25,7 +25,7 @@ namespace BookShop.Controllers
         {
          var storis=_storyService.GetAllStories()
                 .OrderByDescending(s=>s.CreatedAt)
-                .Take(5)
+                .Take(8)
                 .ToList();
             return View(storis);
         }

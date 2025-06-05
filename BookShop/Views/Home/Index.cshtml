@@ -69,8 +69,26 @@
     <div class="headerItems">
         <img class="headImg" src="~/asstes/img/com asli.jpg" width="500px" height="450px" alt="Mikaeel header">
     </div>
-</header>
  
+</header>
+<div class="headerfavoriet">
+    <img src="~/asstes/img/StarIcon-removebg-preview.png" alt="ستاره" class="star-img" />
+    <span class="colorful-text">محبوب ترین برندها</span>
+ 
+</div>
+<div class="brand-container">
+    <div class="brands-slider" id="brandsSlider">
+        <img src="~/asstes/img/Nokia_Icon-removebg-preview.png" alt="Nokia" />
+        <img src="~/asstes/img/hp_icon-removebg-preview.png" alt="Hp" />
+        <img src="~/asstes/img/Samsung_Image-removebg-preview.png" alt="Samsung" />
+        <img src="~/asstes/img/motorola_icon-removebg-preview.png" alt="Motorolla" />
+        <img src="~/asstes/img/AppleImage-removebg-preview.png" alt="Apple" />
+        <img src="~/asstes/img/Huway_icon-removebg-preview.png" alt="Huway" />
+
+
+
+    </div>
+</div>
             @await Component.InvokeAsync("HomeBook",new {ShowHome=true ,IsNew=false})
 
             <h2 style="text-align :center">
@@ -148,3 +166,4 @@ currentindex=(currentindex+1) % images.length;
     },3000);
 </script>
 <script src="~/js/Story.js"></script>
+<script src="~/js/FavoriteSlider.js"></script>

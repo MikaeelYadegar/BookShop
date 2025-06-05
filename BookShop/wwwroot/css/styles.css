@@ -1168,3 +1168,80 @@ button{
 button:hover{
     background-color:#45a049;
 }
+.headerfavoriet
+{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+   
+   
+    margin:15px auto 55px;
+    font-size:2.4rem;
+    font-weight:bold;
+    direction:rtl;
+    flex-wrap:wrap;
+    
+}
+.star-img
+{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+    animation:blinkstar 1.5s infinite ease-in-out;
+}
+@keyframes blinkstar
+{
+    0%,100%{
+        opacity:1;
+        filter:drop-shadow(0 0 4px gold);
+    }
+    50% {
+        opacity: 0.5;
+        filter: drop-shadow(0 0 12px gold);
+    }
+}
+.colorful-text{
+    background:linear-gradient(
+        270deg,
+       
+        #ffd700,
+        #c0c0c0,
+        #fff       
+        );
+    background-size:800% 800%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:rainbowMove 6s ease infinite;
+    white-space:nowrap;
+    text-shadow:0 0 6px rgba(255,255,255,0.4);
+}
+@keyframes rainbowMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+.brand-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:60px;
+    overflow:hidden;
+    padding:0 20px;
+    box-sizing:border-box;
+}
+.brands-slider{
+    display:flex;
+    gap:20px;
+    transition: transform 0.5s ease;
+}
+.brands-slider img{
+    width:100px;
+    height:auto;
+    object-fit:contain;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+    transition:transform 0.3s ease;
+}
+.brands-slider img:hover{
+    transform:scale(1.05);
+}
