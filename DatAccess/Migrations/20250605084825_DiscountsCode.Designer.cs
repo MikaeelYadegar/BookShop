@@ -4,6 +4,7 @@ using DatAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatAccess.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250605084825_DiscountsCode")]
+    partial class DiscountsCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,6 +131,9 @@ namespace DatAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IphoneBrandHomePage")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsAvail")
                         .HasColumnType("bit");
 
@@ -209,7 +215,7 @@ namespace DatAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DiscountCodes");
+                    b.ToTable("DiscountsCodes");
                 });
 
             modelBuilder.Entity("DatAccess.Models.MessageChat", b =>

@@ -1245,3 +1245,98 @@ button:hover{
 .brands-slider img:hover{
     transform:scale(1.05);
 }
+.spinBtn:hover{
+    background-color:darkred;
+}
+.circul{
+    width:400px;
+    height:400px;
+    position:relative;
+    z-index:10;
+    margin:50px auto;
+    border-radius:1200%;
+}
+.lamp {
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    z-index:20;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('/asstes/img/Lamp_ONN-removebg-preview.png');
+    top: 34%;
+    left: 44%;
+    transform: rotate(calc(30deg*var(--i))) translate(175px) rotate(calc(-30deg*var(--i)));
+    animation: blinkLamp 1s infinite;
+}
+@keyframes blinkLamp{
+    0%,100% {
+        background-image: url('/asstes/img/Lamp_ONN-removebg-preview.png');
+    }
+    50% {
+        background-image: url('/asstes/img/Lamp_Off-removebg-preview.png');
+    }
+}
+.routate-text{
+    font-family:'Vazirmatn',sans-serif;
+    font-size:37px ;
+    color:gold;
+    background:linear-gradient(to right,#222,#333);
+    padding:25px 150px;
+  margin-right:390px;
+  margin-top:40px;
+    border-radius:12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    box-shadow:0 0 15px rgba(255,215,0,0.6);
+    direction:rtl;
+}
+    .routate-text .static {
+        font-weight: bold;
+        color: #fff;
+    }
+.routate-text .rotating{
+    display:inline-block;
+    height:30px;
+    overflow:hidden;
+    position:relative;
+}
+.routate-text .rotating span{
+    display:block;
+    animation:rotateText 4s linear infinite;
+    height:30px;
+    line-height:30px;
+}
+@keyframes rotateText{
+    0%,15%{
+        transform:translateY(0%);
+    }
+    25%,40%{
+        transform:translateY(-100%);
+    }
+    50%,65%{
+        transform:translateY(-200%);
+    }
+    75%,90% {
+        transform: translateY(-300%);
+    }
+    100%{
+        transform:translateY(0%);
+    }
+}
+.section-divider-spin{
+    margin-bottom:20px;
+    margin-top:20px;
+    background: transparent;
+    box-shadow:0 -2px 5px rgba(0,0,0,0.05),0 5px 5px rgba(0,0,0,0.05);
+/*    height:20px;
+    width:100%;
+    background:linear-gradient(to bottom,rgba(0,0,0,0.05),rgba(0,0,0,0));
+    margin:40px 0;
+    pointer-events:none;
+    z-index:1;
+    position:relative;
+    clear:both;*/
+}

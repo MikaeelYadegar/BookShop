@@ -17,6 +17,7 @@ public class BookDbContext : IdentityDbContext<User,Role,int>
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Story> Stories { get; set; }
     public DbSet<MessageChat> MessageChats { get; set; }
+    public DbSet<DiscountCode> DiscountCodes { get; set; }
 }
 public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<BookDbContext>
 {

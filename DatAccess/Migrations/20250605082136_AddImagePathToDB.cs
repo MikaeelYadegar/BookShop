@@ -5,21 +5,21 @@
 namespace DatAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIsEditDeleteChat : Migration
+    public partial class AddImagePathToDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //migrationBuilder.AddColumn<bool>(
-            //    name: "IsDeleted",
+            //migrationBuilder.AddColumn<string>(
+            //    name: "ImagePath",
             //    table: "MessageChats",
-            //    type: "bit",
+            //    type: "nvarchar(max)",
             //    nullable: false,
-            //    defaultValue: false);
+            //    defaultValue: "");
 
             //migrationBuilder.AddColumn<bool>(
-            //    name: "IsEdited",
-            //    table: "MessageChats",
+            //    name: "IphoneBrandHomePage",
+            //    table: "Books",
             //    type: "bit",
             //    nullable: false,
             //    defaultValue: false);
@@ -29,12 +29,12 @@ namespace DatAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.DropColumn(
-            //    name: "IsDeleted",
+            //    name: "ImagePath",
             //    table: "MessageChats");
 
             //migrationBuilder.DropColumn(
-            //    name: "IsEdited",
-            //    table: "MessageChats");
+            //    name: "IphoneBrandHomePage",
+            //    table: "Books");
         }
     }
 }

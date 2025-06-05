@@ -13,7 +13,7 @@ namespace DatAccess.Models
         public string ReciverId { get; set; }
         public string Message { get; set; }
         public DateTime Timestamp { get; set; }
-
+        public string ImagePath { get; set; }
    
     }
 }

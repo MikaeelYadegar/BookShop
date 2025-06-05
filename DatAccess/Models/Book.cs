@@ -18,6 +18,7 @@ public class Book
     [ForeignKey("AuthoreId")]
     public Authore ? Authore { get; set; }
     public ICollection<BasketItems>? BasketItems { get; set; }
+
   
    
 }

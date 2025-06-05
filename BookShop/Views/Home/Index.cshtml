@@ -16,6 +16,12 @@
     <span onclick="goToImage(2)"></span>
     <span onclick="goToImage(3)"></span>
 </div>
+
+<div class="story-text">
+  
+</div>
+<div class="section-divider-spin">
+  <br />
 <div  class="story-container">
     @foreach(var story in Model)
     {
@@ -41,6 +47,7 @@
               
     }
 </div>
+
 <div id="storyModal" class="modal1" onclick="hideStory()">
     <span class="close">&times;</span>
         <div class="modal-content1">
@@ -48,6 +55,52 @@
             <video id="modalVideo" controls style="display:none;"></video>
         </div>
 </div>
+<br />
+</div>
+<div class="section-divider-spin">
+<div class="routate-text">
+    <span class="static">گردونه شانس</span>
+    <span class="rotating">
+        <span>کد تخفیف 5%</span>
+        <span>کد تخفیف 10%</span>
+        <span>کد تخفیف 20%</span>
+        <span>کد تخفیف 30%</span>
+    </span>
+</div>
+<div class="circul">
+    <div class=" lamp" style="--i:0"></div>
+    <div class=" lamp" style="--i:1"></div>
+    <div class=" lamp" style="--i:2"></div>
+    <div class=" lamp" style="--i:3"></div>
+    <div class=" lamp" style="--i:4"></div>
+    <div class=" lamp" style="--i:5"></div>
+    <div class=" lamp" style="--i:6"></div>
+    <div class=" lamp" style="--i:7"></div>
+    <div class=" lamp" style="--i:8"></div>
+    <div class=" lamp" style="--i:9"></div>
+    <div class=" lamp" style="--i:10"></div>
+    <div class=" lamp" style="--i:11"></div>
+
+    <div style="text-align:center;margin-top:50px;">
+        <div id="wheel" style="width:300px;height:300px;margin:auto;border:10px solid #555;border-radius:50%;position:relative;">
+            <div style=" position:absolute;top:50%;left:-10px;transform:translateY(-50%) rotate(180deg);z-index:10;">
+                <div style="width:0;height:0;border-top:15px solid transparent;
+               border-bottom:15px solid transparent;border-right:20px solid red;"></div>
+            </div>
+            <canvas id="wheelCanvas" width="300" height="300"></canvas>
+            <div id="spinBtn"
+                 style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+            background-color:crimson;color:white;padding:10px 20px;border-radius:50%;cursor:pointer">
+                SPIN
+            </div>
+
+        </div>
+
+        <div id="result" style="margin:30px;font-size:20px;font-weight:bold;"></div>
+        </div>
+    </div>
+    </div>
+
 <header class="myHeader">
     <div class="headerItems">
         <h1>
@@ -71,11 +124,13 @@
     </div>
  
 </header>
+<div class="section-divider-spin">
 <div class="headerfavoriet">
     <img src="~/asstes/img/StarIcon-removebg-preview.png" alt="ستاره" class="star-img" />
     <span class="colorful-text">محبوب ترین برندها</span>
  
 </div>
+
 <div class="brand-container">
     <div class="brands-slider" id="brandsSlider">
         <img src="~/asstes/img/Nokia_Icon-removebg-preview.png" alt="Nokia" />
@@ -89,6 +144,9 @@
 
     </div>
 </div>
+<br />
+</div>
+
             @await Component.InvokeAsync("HomeBook",new {ShowHome=true ,IsNew=false})
 
             <h2 style="text-align :center">
@@ -167,3 +225,6 @@ currentindex=(currentindex+1) % images.length;
 </script>
 <script src="~/js/Story.js"></script>
 <script src="~/js/FavoriteSlider.js"></script>
+<script src="~/js/Spin.js"></script>
+<script src="~/js/LampSpin.js"></script>
+<link href="~/asstes/fonts/B_Yekan/Yekan.ttf" />

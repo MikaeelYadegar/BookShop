@@ -2,6 +2,7 @@
 using Core.AuthoreService;
 using Core.BookService;
 using Core.ChatBoxService;
+using Core.DiscountService;
 using Core.FileUpload;
 using Core.OrderService;
 using Core.StoryService;
@@ -12,6 +13,7 @@ using DatAccess.Repositories.BasketRepo;
 using DatAccess.Repositories.BookRepo;
 using DatAccess.Repositories.ChatRepo;
 using DatAccess.Repositories.CommentRepo;
+using DatAccess.Repositories.DiscountRepo;
 using DatAccess.Repositories.StoryRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,8 @@ builder.Services.AddScoped<IStoryRepository,StoryRepository>();
 builder.Services.AddScoped<IStoryService,StoryService>();
 builder.Services.AddScoped<IChatMessageRepository,ChatMessageRepository>();
 builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<IDiscountsCodesRepository, DiscountsCodes>();
+builder.Services.AddScoped<IDiscountCodeService, DiscountCodeService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSignalR();
 builder.Services.AddSession(options =>
